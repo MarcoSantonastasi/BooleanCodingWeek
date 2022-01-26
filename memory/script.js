@@ -1,16 +1,14 @@
 const grid = document.querySelector('#grid');
 const errorCounter = document.querySelector('#error');
 const cards = ['alien', 'bug', 'duck', 'rocket', 'spaceship', 'tiktac'];
-const deck = [...cards,...cards];
+const deck = [...cards, ...cards];
 
 let pick = [];
-let errors = 0;
+let errors = 0
 
 deck.sort(function() {
     return 0.5 - Math.random();
 });
-
-console.table(deck);
 
 for(let i = 0; i < deck.length; i++) {
     const card = document.createElement('div');
@@ -23,7 +21,6 @@ for(let i = 0; i < deck.length; i++) {
 
 errorCounter.innerText = errors;
 
-//Defining function flipCard
 function flipCard(event) {
     const card = event.target;
 
@@ -35,11 +32,11 @@ function flipCard(event) {
     console.log(pick);
 
     if(pick.length === 2) {
+        // check for match
         checkForMatch();
     }
 }
 
-//Defining function checkForMatch
 function checkForMatch() {
     const card1 = pick[0];
     const card2 = pick[1];
@@ -47,11 +44,8 @@ function checkForMatch() {
     const card2Name = card2.getAttribute('data-name');
 
     if(card1Name === card2Name) {
-        console.log('It\'s a Match!');
         checkForWin();
-    }
-    else {
-        console.log('It\'s not a Match :(');
+    } else {        
         setTimeout(function() {
             card1.classList.remove(card1Name, 'flipped');
             card2.classList.remove(card2Name, 'flipped');
@@ -63,12 +57,10 @@ function checkForMatch() {
     pick = [];
 }
 
-//Defining checkForWin
 function checkForWin() {
     const flippedCards = document.querySelectorAll('.flipped');
-    console.log(flippedCards);
-
     if(flippedCards.length === deck.length) {
-        showAlert('You Won!');
+        showAlert('Hai vinto!');
     }
 }
+
